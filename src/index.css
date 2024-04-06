@@ -182,4 +182,10 @@
   .small-edit-form {
     padding: 1px 10px;
   }
+  .small-footer {
+    display: none;
+  }
+  .small-screen-login {
+    width: 90%;
+  }
 }
