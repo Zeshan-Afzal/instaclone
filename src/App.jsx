@@ -56,6 +56,8 @@ function App() {
           dispatch(logout());
           navigate("/login"); // Navigate to login page
         } else {
+          dispatch(logout());
+          navigate("/login"); // Navigate to login page
           // Other error occurred, handle as needed
           console.error("Error fetching current user:", error);
           // Optionally handle the error case here

@@ -37,17 +37,21 @@ function Profiel() {
   });
 
   useEffect(() => {
-    userData.getDoc(userInfo?.$id).then((docInfo) => {
-      if (docInfo) {
-        console.log(docInfo);
-        dispatch(getDocData({ docInfo }));
-      } else {
-        dispatch(deleteData());
-      }
-    });
+    userData
+      .getDoc(userInfo?.$id)
+      .then((docInfo) => {
+        if (docInfo) {
+          console.log(docInfo);
+          dispatch(getDocData({ docInfo }));
+        } else {
+          dispatch(deleteData());
+        }
+      })
+      .catch((err) => {
+        console.log("something Went wrong while getting documents in profile");
+      });
     const queries = [Query.equal("userId", userInfo?.$id)];
     userPosts.getUserPost(queries).then((res) => {
-      console.log(res.documents);
       dispatch(getPosts(res.documents));
     });
   }, []);
@@ -80,6 +84,7 @@ function Profiel() {
             const documentDetails = await userData.createDocument(user.$id, {
               ...data,
             });
+            dispatch(closeUpdate());
           }
         }
       }
@@ -109,7 +114,7 @@ function Profiel() {
 
         <div className=" h-auto relative  w-full">
           {isUpdateOpen && (
-            <div className=" absolute bg-black bg-opacity-5   h-3/5 z-30   flex items-center justify-center w-full   ">
+            <div className=" absolute bg-black bg-opacity-5   h-4/5 z-30   flex items-center justify-center w-full   ">
               <i
                 onClick={() => dispatch(closeUpdate())}
                 className="fa-solid fa-xmark absolute right-10 top-6 text-4xl cursor-pointer"
@@ -166,7 +171,7 @@ function Profiel() {
                     <>
                       <p className="text-xl">Add Photos </p>
                       <label
-                        className=" bg-blue-500  small-screen-update-btn px-28 py-1 text-white rounded-lg cursor-pointer "
+                        className=" bg-blue-500  small-screen-update-btn px-20 py-1 text-white rounded-lg cursor-pointer "
                         htmlFor="file"
                       >
                         Add File
@@ -237,7 +242,7 @@ function Profiel() {
               </div>
 
               <div className="text-left pl-4 ">
-                <p className="text-base font-medi mr-2">Bio: {docInfo?.bio}</p>
+                <p className="text-base font-medi mr-2"> {docInfo?.bio}</p>
               </div>
             </div>
           </div>
