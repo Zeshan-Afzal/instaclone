@@ -22,12 +22,15 @@ function Header() {
 
               <div className=" flex  small-screen-link  items-center gap-4 justify-between  w-1/4">
                 <Link to="/profile">
-                  <div className=" w-16 h-16 rounded-full small-header-image  mb-3 flex items-center gap-2">
-                    <img
-                      className=" rounded-full h-full w-full"
-                      src={filePreview}
-                      alt="this a imga"
-                    />
+ <div className=" rounded-full small-header-image  mb-3 flex items-center gap-2">
+                    <div className=" w-16 h-16 rounded-full">
+                      <img
+                        className=" rounded-full h-full w-full"
+                        src={filePreview}
+                        alt="this a imga"
+                      />
+                    </div>
+
                     <p className=" font-bold mb-3">{userInfo?.name}</p>
                   </div>
                 </Link>
